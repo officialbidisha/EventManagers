@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const connectDB= require('./db');
+const loginRoutes = require('./routes/login');
+const registerRoutes = require('./routes/register');
 
 connectDB();
 app.use(cors());
@@ -16,8 +18,8 @@ app.use("/", (req, res) => {
   res.send("Server running.");
 });
 
-// app.use('/api/users', require('./routes/users'));
-// app.use('/api/posts', require('./routes/posts'));
+app.use('/api/login', loginRoutes);
+app.use('/api/register', registerRoutes);
 
 const port = process.env.PORT || 9000;
 
