@@ -1,0 +1,81 @@
+.vertical{
+    width: 0px;
+    height: calc(100% - 20px);
+    position: absolute;
+    left: 30%;
+    width: 1px;
+    background: #000000a3;
+}
+.event-card{
+    background-color: #c0c5ff;
+    position: relative;
+    display: flex;
+    margin: 10px;
+    border-radius: 10px;
+    align-items: center;
+    border: 0.4px solid #3737eb;
+    min-width: 200px;
+}
+
+.select-btn{
+    background-color: rgb(175, 232, 175);
+    border-radius: 5px;
+    border: 1px solid green;
+    color: black;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding: 3px;
+    float: right;
+    height: 30px;
+    padding: 5px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.select-btn:disabled{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.caption{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width: 35%;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.rightrow{
+   padding:5px
+}
+
+.rightrow .name{
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.rightrow .category{
+    font-size: 12px;
+}
+.rightrow .time{
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.select-list{
+    color: blue;
+    width: 38%;
+    height: 4%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    bottom: 0;
+    right: 0;
+    /* border: solid black; */
+    text-align: center;
+}
