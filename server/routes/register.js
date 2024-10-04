@@ -5,35 +5,31 @@ const User = require('../models/User'); // Adjust the path based on your structu
 
 // POST /api/users/create
 router.post('/', async (req, res) => {
-    const { userId, name, email, password } = req.body;
+    const { userId, name } = req.body;
 
-    if (!userId || !name ) {
-        return res.status(400).json({ error: 'All fields are required' });
+    // Check if userId and name are provided
+    if (!userId || !name) {
+        return res.status(400).json({ error: 'userId and name are required' });
     }
 
-    try {
-        // Check if user already exists
-        const existingUser = await User.findOne({ userId });
-        if (existingUser) {
-            return res.status(400).json({ error: 'User already exists' });
-        }
-
-        // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Create new user
-        const newUser = new User({
-            userId,
-            name,
-        });
-
-        await newUser.save();
-
-        res.status(201).json({ message: 'User created successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+    // Ensure userId has at least 7 characters
+    if (userId.length < 7) {
+        return res.status(400).json({ error: 'userId must be at least 7 characters long' });
     }
+
+    // Case-insensitive search for existing userId
+    const existingUser = await User.findOne({ userId: { $regex: new RegExp(`^${userId}$`, 'i') } });
+
+    // If userId already exists
+    if (existingUser) {
+        return res.status(400).json({ error: 'UserId already exists' });
+    }
+
+    // Create new user
+    const newUser = new User({ userId: userId.toLowerCase(), name });
+    await newUser.save();
+
+    return res.status(201).json({ message: 'User created successfully', userId });
 });
 
 module.exports = router;

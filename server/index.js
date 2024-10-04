@@ -14,12 +14,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use('/api/login', loginRoutes);
+app.use('/api/register', registerRoutes);
+
 app.use("/", (req, res) => {
+  console.log(req);
   res.send("Server running.");
 });
 
-app.use('/api/login', loginRoutes);
-app.use('/api/register', registerRoutes);
 
 const port = process.env.PORT || 9000;
 
