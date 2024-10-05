@@ -22,7 +22,7 @@ app.use("/", (req, res) => {
   res.send("Server running.");
 });
 
-
+//port
 const port = process.env.PORT || 9000;
 
 app.listen(port, () => {
