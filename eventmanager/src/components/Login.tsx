@@ -1,7 +1,11 @@
+
+import "./Login.css";
 import React, { useState } from "react";
 import BASE_URL from "../constants/urls";
+import { useToast } from './ToastManager';
 const Login = () => {
   const [userId, setEmail] = useState("");
+  const { showToast } = useToast(); // Use the custom toast context
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -21,11 +25,13 @@ const Login = () => {
         localStorage.setItem("token", data.token); // Adjust to your API response
         // Redirect to events page after successful login
         window.location.href = "/events";
+        showToast('Login successful! Welcome!', 'success');
       } else {
         setError(data.message || "Login failed. Please try again.");
+        showToast(data.message || 'Login failed. Please try again.', 'error');
       }
     } catch (err) {
-      setError("An error occurred. Please try again later.");
+      setError(`An error occurred: ${err}`);
     }
   };
 

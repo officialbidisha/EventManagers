@@ -9,7 +9,7 @@ import { useAppDispatch } from "./hooks";
 import ProtectedRoute from "./components/ProtectedRoute"; 
 import EventsPage from "./components/EventsPage";
 import { makeErrorNull } from "./stores/actions/action";
-
+import { ToastProvider } from "./components/ToastManager";
 const Login = React.lazy(() => import("./components/Login"));
 const Register = React.lazy(() => import("./components/Register"));
 
@@ -34,6 +34,7 @@ function App() {
   }, [error, dispatch]);
 
   return (
+    <ToastProvider>
     <Router>
       <div className="App">
         <Suspense fallback={<Loader />}>
@@ -51,6 +52,7 @@ function App() {
         </Suspense>
       </div>
     </Router>
+    </ToastProvider>
   );
 }
 

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import BASE_URL from "../constants/urls";
+import { useToast } from "./ToastManager";
+import "./Register.css";
 
 const Register = () => {
   const [userId, setUserId] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const { showToast } = useToast(); // Use the custom toast context
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,13 +26,20 @@ const Register = () => {
 
       if (response.ok) {
         // Handle successful registration
-        console.log("Registration successful", data);
+        showToast('Registration successful! Redirecting to login...', 'success');
+        setTimeout(() => {
+          window.location.href = '/login'; // Redirect to login after a short delay
+        }, 2000);
+        // con);sole.log("Registration successful", data
         // Redirect or update UI based on registration
       } else {
-        setError(data.message || "Registration failed. Please try again.");
+        console.log(data)
+        setError(data.error);
+        setUserId("");
+        showToast(data.error|| 'Registration failed. Please try again.', 'error');
       }
     } catch (err) {
-      setError("An error occurred. Please try again later.");
+      setError(`${err}`);
     }
   };
 
@@ -39,7 +49,7 @@ const Register = () => {
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email:</label>
+          <label>User Id</label>
           <input
             type="userId"
             value={userId}
