@@ -23,7 +23,7 @@ const SelectEventList: React.FC = () => {
           />
         ))
       ) : (
-        <p className="select-list">Select an event!</p>
+        <p className="select-list">Selected events..</p>
       )}
     </>
   );

@@ -30,8 +30,6 @@ const Register = () => {
         setTimeout(() => {
           window.location.href = '/login'; // Redirect to login after a short delay
         }, 2000);
-        // con);sole.log("Registration successful", data
-        // Redirect or update UI based on registration
       } else {
         console.log(data)
         setError(data.error);
