@@ -7,6 +7,8 @@ interface Event {
   end_time: string; // Use appropriate date/time type (e.g., Date or string)
   name: string;
   category: string;
+  isDisabled?: boolean;
+  isSelected?: boolean;
 }
 
 interface Payload {

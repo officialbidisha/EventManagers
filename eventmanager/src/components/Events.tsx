@@ -29,19 +29,20 @@ const Events: React.FC<EventsProps> = ({
 
   const toggleSelection = () => {
     if (!isSelected) {
-      dispatch(selectEvent({ id, name, category, startTime, endTime }));
+      dispatch(selectEvent({ id, name, event_category: category, startTime, endTime }));
     } else {
       dispatch(
         removeSelectedEvent({
-          id: id,
-          event_name: name,
-          event_category: category,
-          start_time: startTime,
-          end_time: endTime,
+          id,
+          name,  // Ensure this matches your EventDetails interface
+          event_category: category,  // Ensure this matches your EventDetails interface
+          startTime,  // Ensure this matches your EventDetails interface
+          endTime,  // Ensure this matches your EventDetails interface
         })
       );
     }
   };
+  
 
   return (
     <div className="event-card">
