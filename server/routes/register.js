@@ -5,6 +5,7 @@ const User = require('../models/User'); // Adjust the path based on your structu
 
 // POST /api/users/create
 router.post('/', async (req, res) => {
+    console.log(req);
     const { userId, name } = req.body;
 
     // Check if userId and name are provided
