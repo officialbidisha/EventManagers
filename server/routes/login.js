@@ -3,7 +3,6 @@ const router = express.Router();
 const User = require('../models/User');
 // POST /api/users/login
 router.post('/', async (req, res) => {
-    console.log('r',req);
     const { userId } = req.body;
     if (!userId) {
         return res.status(400).json({ error: 'User ID and password are required' });
