@@ -11,7 +11,7 @@ const registerRoutes = require('./routes/register');
 connectDB();
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://server-c9rg0g50a-officialbidishas-projects.vercel.app'],
+  origin: ['http://localhost:3000', 'https://server-c9rg0g50a-officialbidishas-projects.vercel.app', 'https://eventmanager-cb3jjxjxn-officialbidishas-projects.vercel.app/'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // add the methods you need
   allowedHeaders: ['Content-Type', 'Authorization'], // add any custom headers you may use
 };
