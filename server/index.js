@@ -9,7 +9,7 @@ const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
 
 connectDB();
-app.use(cors());
+app.use(cors({origin:'http://localhost:3000'}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
