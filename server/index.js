@@ -18,7 +18,6 @@ app.use('/api/login', loginRoutes);
 app.use('/api/register', registerRoutes);
 
 app.use("/", (req, res) => {
-  console.log(req);
   res.send("Server running.");
 });
 
