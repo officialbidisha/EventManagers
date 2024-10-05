@@ -9,7 +9,13 @@ const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
 
 connectDB();
-app.use(cors({origin:'http://localhost:3000'}));
+
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://server-c9rg0g50a-officialbidishas-projects.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // add the methods you need
+  allowedHeaders: ['Content-Type', 'Authorization'], // add any custom headers you may use
+};
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
