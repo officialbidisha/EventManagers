@@ -2,18 +2,10 @@ import "./Events.css";
 import "../styles.css";
 import tConvert from "../utils/timeConverter";
 import { useDispatch } from "react-redux";
+import type { Event } from "../models/Event";
 import { removeSelectedEvent, selectEvent } from "./../stores/actions/action";
 import { memo } from "react";
-interface EventsProps {
-  id: string; // Assuming id is a string. Adjust type if necessary.
-  name: string;
-  category: string;
-  startTime: string; // Optional prop
-  endTime: string; // Optional prop
-  isSelected?: boolean; // Optional prop
-  isDisabled?: boolean; // Optional prop
-}
-const Events: React.FC<EventsProps> = ({
+const Events: React.FC<Event> = ({
   id,
   name,
   category,

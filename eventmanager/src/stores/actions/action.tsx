@@ -1,13 +1,8 @@
+import { Event } from "../../models/Event";
 import { ActionTypes } from "./../action-types/action-types";
 import { Dispatch } from "redux";
 // Update Action interface to use the ActionTypes enum
-interface EventDetails {
-  id: string;
-  name: string;
-  event_category: string;
-  startTime: string;
-  endTime: string;
-}
+
 
 interface ErrorPayload {
   message: string;
@@ -15,12 +10,12 @@ interface ErrorPayload {
 }
 
 export type Action =
-  | { type: ActionTypes.GET_EVENTLIST; payload: EventDetails[] }
+  | { type: ActionTypes.GET_EVENTLIST; payload: Event[] }
   | { type: ActionTypes.ADD_ERROR; payload: ErrorPayload }
   | { type: ActionTypes.REMOVE_ERROR_STATE }
-  | { type: ActionTypes.SELECT_EVENT; payload: EventDetails }
-  | { type: ActionTypes.REMOVE_SELECTED_EVENT; payload: EventDetails }
-  | { type: ActionTypes.MAKE_EVENT_UNSELECTABLE; payload: EventDetails };
+  | { type: ActionTypes.SELECT_EVENT; payload: Event }
+  | { type: ActionTypes.REMOVE_SELECTED_EVENT; payload: Event }
+  | { type: ActionTypes.MAKE_EVENT_UNSELECTABLE; payload: Event };
 
 export const getEventList = () => async (dispatch: Dispatch<Action>) => {
   let response;
@@ -39,12 +34,12 @@ export const getEventList = () => async (dispatch: Dispatch<Action>) => {
 };
 
 export const selectEvent =
-  (eventDetails: EventDetails) => (dispatch: Dispatch<Action>) => {
+  (eventDetails: Event) => (dispatch: Dispatch<Action>) => {
     dispatch({ type: ActionTypes.SELECT_EVENT, payload: eventDetails });
   };
 
 export const removeSelectedEvent =
-  (eventDetails: EventDetails) => (dispatch: Dispatch<Action>) => {
+  (eventDetails: Event) => (dispatch: Dispatch<Action>) => {
     dispatch({
       type: ActionTypes.REMOVE_SELECTED_EVENT,
       payload: eventDetails,

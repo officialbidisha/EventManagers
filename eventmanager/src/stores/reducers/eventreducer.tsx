@@ -1,15 +1,7 @@
 import {ActionTypes} from "../action-types/action-types";
 import { returnTime, isConflictPresent } from "../../utils/conflictCalulator";
+import type { Event } from "../../models/Event";
 // Define types for event and payload structures
-interface Event {
-  id: string;
-  start_time: string; // Use appropriate date/time type (e.g., Date or string)
-  end_time: string; // Use appropriate date/time type (e.g., Date or string)
-  name: string;
-  category: string;
-  isDisabled?: boolean;
-  isSelected?: boolean;
-}
 
 interface Payload {
   startTime: string; // Use appropriate date/time type
@@ -42,9 +34,9 @@ const getConflictingEvents = (events: Event[], payload: Payload): string[] => {
   const conflictingIds: string[] = [];
 
   for (let i = 0; i < events.length; i++) {
-    const l1 = returnTime(events[i].start_time);
+    const l1 = returnTime(events[i].startTime);
     const l2 = returnTime(payload.startTime);
-    const r1 = returnTime(events[i].end_time);
+    const r1 = returnTime(events[i].endTime);
     const r2 = returnTime(payload.endTime);
 
     if (
@@ -66,9 +58,9 @@ const removeConflictingEvents = (
   let conflictingIds = [...currentDisabledIndexes];
 
   for (let i = 0; i < events.length; i++) {
-    const l1 = returnTime(events[i].start_time);
+    const l1 = returnTime(events[i].startTime);
     const l2 = returnTime(payload.startTime);
-    const r1 = returnTime(events[i].end_time);
+    const r1 = returnTime(events[i].endTime);
     const r2 = returnTime(payload.endTime);
 
     if (isConflictPresent(l1, l2, r1, r2)) {
