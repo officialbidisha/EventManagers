@@ -1,17 +1,18 @@
 import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 import React, { useEffect, Suspense } from "react";
 import { getEventList, makeErrorNull } from "./stores/actions/action";
 import { RootState } from "./stores/reducers/index"; // Ensure this path is correct
 import Loader from "./components/Loader";
 import { store } from "./stores/index";
+import { useAppDispatch } from "./hooks";
 
 const SelectedEventsList = React.lazy(() => import('./components/SelectedEventsList'));
 const EventList = React.lazy(() => import("./components/EventList"));
 
 function App() {
   const { error, events } = useSelector((state: RootState) => state.app);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (store && events.length <= 0) {
@@ -19,15 +20,18 @@ function App() {
     }
   }, [dispatch, events.length]);
 
-  useEffect(() => {
-    if (error) {
-      alert(error.message);
-      if (window.confirm) {
-        console.log('Confirm');
-        dispatch(makeErrorNull());
-      }
-    }
-  }, [error, dispatch]);
+  // useEffect(() => {
+  //   if (error) {
+  //     alert(error.message);
+  //     // Display confirmation dialog to the user
+  //     const userConfirmed = window.confirm("Do you want to clear the error?");
+  //     if (userConfirmed) {
+  //       console.log('Confirm');
+  //       dispatch(makeErrorNull());
+  //     }
+  //   }
+  // }, [error, dispatch]);
+  
 
   return (
     <div className="App">

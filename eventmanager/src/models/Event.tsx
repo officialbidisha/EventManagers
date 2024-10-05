@@ -1,10 +1,9 @@
-export  interface Event {
+export interface Event {
     id: string;
-    startTime: string; // Use appropriate date/time type (e.g., Date or string)
-    endTime: string; // Use appropriate date/time type (e.g., Date or string)
-    name: string;
-    category: string;
+    start_time: string; // Use appropriate date/time type (e.g., Date or string)
+    end_time: string; // Use appropriate date/time type (e.g., Date or string)
+    event_name: string;
+    event_category: string;
     isDisabled?: boolean;
     isSelected?: boolean;
   }
-  

@@ -5,6 +5,7 @@ import type { Event } from "../models/Event";
 import { RootState } from "./../stores/reducers/index"; // Adjust the path based on your file structure
 
 const EventList: React.FC = () => {
+  debugger;
   // Get the events list and disabled index from the Redux store
   const list: Event[] = useSelector((state: RootState) => state.app.events);
   const disabledIndex: string[] = useSelector(
@@ -17,21 +18,21 @@ const EventList: React.FC = () => {
       {list.length > 0 &&
         list.map((listEle) => {
           const {
-            name,
-            category,
+            event_name,
+            event_category,
             id,
-            endTime,
-            startTime,
+            start_time,
+            end_time,
           } = listEle;
 
           return (
             <Events
               key={id}
               id={id}
-              name={name}
-              category={category}
-              endTime={endTime}
-              startTime={startTime}
+              event_name={event_name}
+              event_category={event_category}
+              end_time={end_time}
+              start_time={start_time}
               isSelected={false}
               isDisabled={disabledIndex.includes(id)} // Check if id is in the disabled index
             />

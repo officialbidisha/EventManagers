@@ -1,35 +1,36 @@
 import "./Events.css";
 import "../styles.css";
 import tConvert from "../utils/timeConverter";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../hooks";
 import type { Event } from "../models/Event";
 import { removeSelectedEvent, selectEvent } from "./../stores/actions/action";
 import { memo } from "react";
 const Events: React.FC<Event> = ({
   id,
-  name,
-  category,
-  startTime = "",
-  endTime = "",
+  event_name,
+  event_category,
+  start_time = "",
+  end_time = "",
   isSelected = false,
   isDisabled = false,
 }) => {
-  const dispatch = useDispatch();
-  const firstLetter = category && category.substring(0, 1);
-  const starttime = startTime.split(" ")[1];
-  const endtime = endTime.split(" ")[1];
+  debugger;
+  const dispatch = useAppDispatch();
+  const firstLetter = event_category && event_category.substring(0, 1);
+  const starttime = start_time.split(" ")[1];
+  const endtime = end_time.split(" ")[1];
 
   const toggleSelection = () => {
     if (!isSelected) {
-      dispatch(selectEvent({ id, name, event_category: category, startTime, endTime }));
+      dispatch(selectEvent({ id, event_name, event_category, start_time, end_time }));
     } else {
       dispatch(
         removeSelectedEvent({
           id,
-          name,  // Ensure this matches your EventDetails interface
-          event_category: category,  // Ensure this matches your EventDetails interface
-          startTime,  // Ensure this matches your EventDetails interface
-          endTime,  // Ensure this matches your EventDetails interface
+          event_name,  // Ensure this matches your EventDetails interface
+          event_category,  // Ensure this matches your EventDetails interface
+          start_time,  // Ensure this matches your EventDetails interface
+          end_time,  // Ensure this matches your EventDetails interface
         })
       );
     }
@@ -41,8 +42,8 @@ const Events: React.FC<Event> = ({
       <div className="caption">{firstLetter}</div>
       <hr className="vertical"></hr>
       <div className="rightrow">
-        <div className="name mb-3">{name}</div>
-        <div className="category mb-3">{category}</div>
+        <div className="name mb-3">{event_name}</div>
+        <div className="event_category mb-3">{event_category}</div>
         <div className="time mb-3">
           {tConvert(starttime)}-{tConvert(endtime)}
         </div>

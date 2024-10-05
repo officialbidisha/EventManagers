@@ -1,8 +1,9 @@
 import { Event } from "../../models/Event";
 import { ActionTypes } from "./../action-types/action-types";
 import { Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
 // Update Action interface to use the ActionTypes enum
-
+import { RootState } from "../reducers/index";
 
 interface ErrorPayload {
   message: string;
@@ -20,10 +21,12 @@ export type Action =
 export const getEventList = () => async (dispatch: Dispatch<Action>) => {
   let response;
   try {
+    debugger;
     let eventList = await fetch(
-      "https://run.mocky.io/v3/9e564653-bf83-4fb8-a223-28075130ff9c"
+      "https://run.mocky.io/v3/e1db1392-dbad-4ade-ace1-315b518c9d63"
     );
     response = await eventList.json();
+    console.log('Response', response);
     dispatch({ type: ActionTypes.GET_EVENTLIST, payload: response });
   } catch (err) {
     const errorPayload: ErrorPayload = {
@@ -32,7 +35,6 @@ export const getEventList = () => async (dispatch: Dispatch<Action>) => {
     dispatch({ type: ActionTypes.ADD_ERROR, payload: errorPayload });
   }
 };
-
 export const selectEvent =
   (eventDetails: Event) => (dispatch: Dispatch<Action>) => {
     dispatch({ type: ActionTypes.SELECT_EVENT, payload: eventDetails });
@@ -46,6 +48,13 @@ export const removeSelectedEvent =
     });
   };
 
-export const makeErrorNull = () => (dispatch: Dispatch<Action>) => {
-  dispatch({ type: ActionTypes.REMOVE_ERROR_STATE });
+export const makeErrorNull = (): ThunkAction<
+  void,
+  RootState,
+  unknown,
+  Action
+> => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionTypes.REMOVE_ERROR_STATE });
+  };
 };

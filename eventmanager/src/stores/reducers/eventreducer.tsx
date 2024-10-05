@@ -34,9 +34,9 @@ const getConflictingEvents = (events: Event[], payload: Payload): string[] => {
   const conflictingIds: string[] = [];
 
   for (let i = 0; i < events.length; i++) {
-    const l1 = returnTime(events[i].startTime);
+    const l1 = returnTime(events[i].start_time);
     const l2 = returnTime(payload.startTime);
-    const r1 = returnTime(events[i].endTime);
+    const r1 = returnTime(events[i].end_time);
     const r2 = returnTime(payload.endTime);
 
     if (
@@ -58,9 +58,9 @@ const removeConflictingEvents = (
   let conflictingIds = [...currentDisabledIndexes];
 
   for (let i = 0; i < events.length; i++) {
-    const l1 = returnTime(events[i].startTime);
+    const l1 = returnTime(events[i].start_time);
     const l2 = returnTime(payload.startTime);
-    const r1 = returnTime(events[i].endTime);
+    const r1 = returnTime(events[i].end_time);
     const r2 = returnTime(payload.endTime);
 
     if (isConflictPresent(l1, l2, r1, r2)) {

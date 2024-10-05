@@ -15,10 +15,10 @@ const SelectEventList: React.FC = () => {
           <Events
             key={ele.id}
             id={ele.id}
-            name={ele.name}
-            category={ele.category}
-            endTime={ele.endTime}
-            startTime={ele.startTime}
+            event_name={ele.event_name}
+            event_category={ele.event_category}
+            end_time={ele.end_time}
+            start_time={ele.start_time}
             isSelected={true}
           />
         ))
