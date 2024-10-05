@@ -21,6 +21,7 @@
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
+  "proxy": "https://server-2idoqiofw-officialbidishas-projects.vercel.app",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
