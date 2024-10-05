@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'; // Import from redux toolkit
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-import reducers from './reducers/indes'; // Ensure the path is correct
+import reducers from './reducers'; // Ensure the path is correct
 
 const persistConfig = {
   key: 'root',
   storage,
 };
+
 
 // Create a persisted reducer
 const persistedReducer = persistReducer(persistConfig, reducers);

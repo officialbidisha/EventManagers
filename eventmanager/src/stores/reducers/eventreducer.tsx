@@ -1,4 +1,4 @@
-import * as actionTypes from "../action-types/action-types";
+import {ActionTypes} from "../action-types/action-types";
 import { returnTime, isConflictPresent } from "../../utils/conflictCalulator";
 // Define types for event and payload structures
 interface Event {
@@ -88,14 +88,14 @@ export const eventReducer = (
   action: Action
 ): State => {
   switch (action.type) {
-    case actionTypes.GET_EVENTLIST:
+    case ActionTypes.GET_EVENTLIST:
       return {
         ...state,
         events: [...action.payload],
         error: null,
         disabledIndex: [],
       };
-    case actionTypes.SELECT_EVENT:
+    case ActionTypes.SELECT_EVENT:
       if (state.selectedEvents && state.selectedEvents.length <= 2) {
         const currentDisabledIndexes = getConflictingEvents(
           state.events.filter((x) => x.id !== action.payload.id),
@@ -115,7 +115,7 @@ export const eventReducer = (
           error: { message: "Cannot select more than 3 events" },
         };
       }
-    case actionTypes.REMOVE_SELECTED_EVENT:
+    case ActionTypes.REMOVE_SELECTED_EVENT:
       const updatedDisabledIndexes = removeConflictingEvents(
         state.disabledIndex,
         state.events,
@@ -131,12 +131,12 @@ export const eventReducer = (
         error: null,
         disabledIndex: updatedDisabledIndexes,
       };
-    case actionTypes.ADD_ERROR:
+    case ActionTypes.ADD_ERROR:
       return {
         ...state,
         error: { message: action.payload.error },
       };
-    case actionTypes.REMOVE_ERROR_STATE:
+    case ActionTypes.REMOVE_ERROR_STATE:
       return {
         ...state,
         error: null,
