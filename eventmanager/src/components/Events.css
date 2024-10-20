@@ -79,3 +79,9 @@
     /* border: solid black; */
     text-align: center;
 }
+
+.selected{
+    background-color: #eb6437;
+    border: 1px solid #eb6437;
+    color: white;
+}

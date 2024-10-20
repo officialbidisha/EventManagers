@@ -1,8 +1,15 @@
 import React, { createContext, useContext, useState } from 'react';
 import Toast from './Toast';
 
+interface ToastData {
+  id: number;
+  message: string;
+  type: 'success' | 'error';
+}
+
 interface ToastContextType {
-  showToast: (message: string, type: 'success' | 'error') => void;
+  showToast: (message: string, type: 'success' | 'error') => number;
+  hideToast: (id: number) => void;
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
@@ -16,25 +23,29 @@ export const useToast = () => {
 };
 
 export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [toasts, setToasts] = useState<{ message: string; type: 'success' | 'error' }[]>([]);
+  const [toasts, setToasts] = useState<ToastData[]>([]);
+  const [toastId, setToastId] = useState(0); // Unique ID tracker
 
-  const showToast = (message: string, type: 'success' | 'error') => {
-    setToasts((prev) => [...prev, { message, type }]);
+  const showToast = (message: string, type: 'success' | 'error'): number => {
+    const id = toastId + 1;
+    setToastId(id);
+    setToasts((prev) => [...prev, { id, message, type }]);
+    return id; // Return the unique toast ID
   };
 
-  const handleClose = (index: number) => {
-    setToasts((prev) => prev.filter((_, i) => i !== index));
+  const hideToast = (id: number) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
 
   return (
-    <ToastContext.Provider value={{ showToast }}>
+    <ToastContext.Provider value={{ showToast, hideToast }}>
       {children}
-      {toasts.map((toast, index) => (
+      {toasts.map((toast) => (
         <Toast
-          key={index}
+          key={toast.id}
           message={toast.message}
           type={toast.type}
-          onClose={() => handleClose(index)}
+          onClose={() => hideToast(toast.id)} // Close by calling hideToast with the specific id
         />
       ))}
     </ToastContext.Provider>

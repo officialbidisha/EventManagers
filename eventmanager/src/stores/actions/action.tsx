@@ -23,7 +23,7 @@ export const getEventList = () => async (dispatch: Dispatch<Action>) => {
   try {
     debugger;
     let eventList = await fetch(
-      "https://run.mocky.io/v3/e1db1392-dbad-4ade-ace1-315b518c9d63"
+      "https://run.mocky.io/v3/b273405d-0b94-492f-8664-e5e1fb18fec8"
     );
     response = await eventList.json();
     console.log('Response', response);

@@ -48,7 +48,7 @@ const Events: React.FC<Event> = ({
           {tConvert(starttime)}-{tConvert(endtime)}
         </div>
         <button
-          className="select-btn float-right"
+          className={`select-btn float-right ${isSelected? 'selected': ''}`}
           onClick={toggleSelection}
           disabled={isDisabled ? true : false}
         >

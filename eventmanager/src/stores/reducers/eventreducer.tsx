@@ -1,11 +1,11 @@
-import {ActionTypes} from "../action-types/action-types";
+import { ActionTypes } from "../action-types/action-types";
 import { returnTime, isConflictPresent } from "../../utils/conflictCalulator";
 import type { Event } from "../../models/Event";
 // Define types for event and payload structures
 
 interface Payload {
-  startTime: string; // Use appropriate date/time type
-  endTime: string; // Use appropriate date/time type
+  start_time: string; // Use appropriate date/time type
+  end_time: string; // Use appropriate date/time type
 }
 
 interface State {
@@ -22,7 +22,6 @@ export interface EventState {
   error: null | { message: string };
 }
 
-
 const initialState: State = {
   events: [],
   selectedEvents: [],
@@ -35,9 +34,9 @@ const getConflictingEvents = (events: Event[], payload: Payload): string[] => {
 
   for (let i = 0; i < events.length; i++) {
     const l1 = returnTime(events[i].start_time);
-    const l2 = returnTime(payload.startTime);
+    const l2 = returnTime(payload.start_time);
     const r1 = returnTime(events[i].end_time);
-    const r2 = returnTime(payload.endTime);
+    const r2 = returnTime(payload.end_time);
 
     if (
       isConflictPresent(l1, l2, r1, r2) &&
@@ -59,9 +58,9 @@ const removeConflictingEvents = (
 
   for (let i = 0; i < events.length; i++) {
     const l1 = returnTime(events[i].start_time);
-    const l2 = returnTime(payload.startTime);
+    const l2 = returnTime(payload.start_time);
     const r1 = returnTime(events[i].end_time);
-    const r2 = returnTime(payload.endTime);
+    const r2 = returnTime(payload.end_time);
 
     if (isConflictPresent(l1, l2, r1, r2)) {
       conflictingIds = conflictingIds.filter((item) => item !== events[i].id);
@@ -116,15 +115,19 @@ export const eventReducer = (
         action.payload
       );
 
+      const updatedSelectedEvents = state.selectedEvents.filter(
+        (x) => x.id !== action.payload.id
+      );
+
       return {
         ...state,
-        selectedEvents: state.selectedEvents.filter(
-          (x) => x.id !== action.payload.id
-        ),
+        selectedEvents: updatedSelectedEvents,
         events: [...state.events, action.payload],
-        error: null,
+        // Clear error only if there were 3 events before removing one
+        error: updatedSelectedEvents.length < 3 ? null : state.error,
         disabledIndex: updatedDisabledIndexes,
       };
+
     case ActionTypes.ADD_ERROR:
       return {
         ...state,
