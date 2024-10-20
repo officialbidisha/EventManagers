@@ -4,9 +4,7 @@ const User = require('../models/User'); // Adjust the path based on your structu
 
 // POST /api/users/create
 router.post('/', async (req, res) => {
-    console.log(req);
     const { userId } = req.body;
-    console.log(userId);
     // Check if userId and name are provided
     if (!userId) {
         return res.status(400).json({ error: 'userId and name are required' });
@@ -14,7 +12,6 @@ router.post('/', async (req, res) => {
 
     // Ensure userId has at least 7 characters
     if (userId.length < 7) {
-        console.log('userid', userId);
         return res.status(400).json({ error: 'userId must be at least 7 characters long' });
     }
 
