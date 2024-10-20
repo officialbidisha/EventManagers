@@ -3,8 +3,8 @@ import "../styles.css";
 import tConvert from "../utils/timeConverter";
 import { useAppDispatch } from "../hooks";
 import type { Event } from "../models/Event";
-import { removeSelectedEvent, selectEvent } from "./../stores/actions/action";
-import { memo } from "react";
+import { removeSelectedEvent, selectEvent} from "./../stores/actions/action";
+import { memo} from "react";
 const Events: React.FC<Event> = ({
   id,
   event_name,
@@ -16,6 +16,7 @@ const Events: React.FC<Event> = ({
 }) => {
   debugger;
   const dispatch = useAppDispatch();
+
   const firstLetter = event_category && event_category.substring(0, 1);
   const starttime = start_time.split(" ")[1];
   const endtime = end_time.split(" ")[1];
@@ -35,8 +36,6 @@ const Events: React.FC<Event> = ({
       );
     }
   };
-  
-
   return (
     <div className="event-card">
       <div className="caption">{firstLetter}</div>

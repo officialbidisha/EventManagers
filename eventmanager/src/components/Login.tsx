@@ -1,12 +1,14 @@
-
 import "./Login.css";
 import React, { useState } from "react";
 import BASE_URL from "../constants/urls";
 import { useToast } from './ToastManager';
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+
 const Login = () => {
   const [userId, setEmail] = useState("");
   const { showToast } = useToast(); // Use the custom toast context
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,10 +23,8 @@ const Login = () => {
       );
       const data = await response.json();
       if (response.ok) {
-        // Save the token or some identifier in localStorage
         localStorage.setItem("token", data.token); // Adjust to your API response
-        // Redirect to events page after successful login
-        window.location.href = "/events";
+        window.location.href = "/events"; // Redirect to events page
         showToast('Login successful! Welcome!', 'success');
       } else {
         setError(data.message || "Login failed. Please try again.");
@@ -51,6 +51,11 @@ const Login = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+
+      {/* Add a Register button below the form */}
+      <button className="register-link-button" onClick={() => navigate("/register")}>
+        Don't have an account? Register
+      </button>
     </div>
   );
 };

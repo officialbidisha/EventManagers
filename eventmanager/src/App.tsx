@@ -9,37 +9,25 @@ import { useAppDispatch } from "./hooks";
 import ProtectedRoute from "./components/ProtectedRoute"; 
 import EventsPage from "./components/EventsPage";
 import { ToastProvider, useToast } from "./components/ToastManager"; // Adjusted imports
-import Modal from "./components/Modal";
 
 const Login = React.lazy(() => import("./components/Login"));
 const Register = React.lazy(() => import("./components/Register"));
 
 function App() {
-  const { error, events } = useSelector((state: RootState) => state.app);
-  const dispatch = useAppDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Fetch event list on component mount
-  useEffect(() => {
-    if (events.length === 0) {
-      dispatch(getEventList());
-    }
-  }, [dispatch, events.length]);
+  const { error } = useSelector((state: RootState) => state.app);
 
   return (
     <ToastProvider>
-      <MainComponent error={error} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <MainComponent error={error} />
     </ToastProvider>
   );
 }
 
 interface MainComponentProps {
   error: { message?: string } | null; // Adjusted based on your error structure
-  isModalOpen: boolean;
-  setIsModalOpen: (isOpen: boolean) => void;
 }
 
-const MainComponent: React.FC<MainComponentProps> = ({ error, isModalOpen, setIsModalOpen }) => {
+const MainComponent: React.FC<MainComponentProps> = ({ error }) => {
   const dispatch = useAppDispatch();
   const { showToast, hideToast } = useToast(); // Toast methods from context
   const [toastId, setToastId] = useState<number | null>(null); // Keep track of the toast ID
@@ -78,7 +66,7 @@ const MainComponent: React.FC<MainComponentProps> = ({ error, isModalOpen, setIs
             <Route path="/events" element={<ProtectedRoute component={EventsPage} />} />
 
             {/* Default redirect */}
-            <Route path="*" element={<Navigate to="/register" />} />
+            <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         </Suspense>
       </div>

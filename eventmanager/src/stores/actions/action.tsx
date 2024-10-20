@@ -26,7 +26,6 @@ export const getEventList = () => async (dispatch: Dispatch<Action>) => {
       "https://run.mocky.io/v3/b273405d-0b94-492f-8664-e5e1fb18fec8"
     );
     response = await eventList.json();
-    console.log('Response', response);
     dispatch({ type: ActionTypes.GET_EVENTLIST, payload: response });
   } catch (err) {
     const errorPayload: ErrorPayload = {
