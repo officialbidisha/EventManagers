@@ -14,7 +14,6 @@ const Events: React.FC<Event> = ({
   isSelected = false,
   isDisabled = false,
 }) => {
-  debugger;
   const dispatch = useAppDispatch();
 
   const firstLetter = event_category && event_category.substring(0, 1);
