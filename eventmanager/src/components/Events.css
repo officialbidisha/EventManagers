@@ -1,6 +1,6 @@
 .vertical{
     width: 0px;
-    height: calc(100% - 20px);
+    height: calc(100%);
     position: absolute;
     left: 30%;
     width: 1px;

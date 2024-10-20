@@ -43,7 +43,7 @@ const Login = () => {
         <div>
           <label>User Id:</label>
           <input
-            type="userId"
+            type="text"
             value={userId}
             onChange={(e) => setEmail(e.target.value)}
             required

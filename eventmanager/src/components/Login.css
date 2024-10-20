@@ -43,7 +43,7 @@ body {
   }
   
   /* Input Field Styles */
-  input[type="userId"] {
+  input[type="text"] {
     padding: 12px;
     border: 1px solid #ced4da;
     border-radius: 8px;
@@ -51,7 +51,7 @@ body {
     transition: border-color 0.3s;
   }
   
-  input[type="userId"]:focus {
+  input[type="text"]:focus {
     border-color: #007bff;
     outline: none;
   }
