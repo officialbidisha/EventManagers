@@ -52,7 +52,7 @@ const Register = () => {
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label>User Id:</label>
+          <label>User Id</label>
           <input
             type="text"
             value={userId}

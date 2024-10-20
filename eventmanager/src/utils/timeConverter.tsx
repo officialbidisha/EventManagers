@@ -11,7 +11,7 @@ function tConvert(time: string): string {
   const [, hours, minutes] = match;
 
   // Convert hours to 12-hour format and determine AM/PM
-  const adjustedHours = (+hours % 12) || 12;
+  const adjustedHours = +hours % 12 || 12;
   const period = +hours < 12 ? "AM" : "PM";
 
   // Return formatted time
